@@ -1,17 +1,17 @@
-package fr.usmb.m1isc.compilation.simple;
+package fr.usmb.compilation;
 
 import java.io.FileReader;
 import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        SimpleLexer lexer;
+        Lexer lexer;
         if (args.length > 0)
-            lexer = new SimpleLexer(new FileReader(args[0]));
+            lexer = new Lexer(new FileReader(args[0]));
         else
-            lexer = new SimpleLexer(new InputStreamReader(System.in));
+            lexer = new Lexer(new InputStreamReader(System.in));
         @SuppressWarnings("deprecation")
-        SimpleParser p = new SimpleParser(lexer);
+        Parser p = new Parser(lexer);
         p.parse();
     }
 }

@@ -1,13 +1,11 @@
 plugins {
     id 'java'
-    //id 'eclipse'
     id "org.xbib.gradle.plugin.jflex" version "1.7.0"
     id 'org.hvb.java-cup' version '0.1+'
 }
 
 // In this section you declare where to find the dependencies of your project
 repositories {
-    // You can declare any Maven/Ivy/file repository here.
     mavenCentral()
 }
 
@@ -26,7 +24,7 @@ sourceSets {
 }
 
 jflex {
-    no_backup = true    
+    no_backup = true
 }
 
 cup {
@@ -41,7 +39,7 @@ compileJava.options.encoding = 'UTF-8'
 
 jar {
     manifest {
-        attributes  'Main-Class': 'fr.usmb.m1isc.compilation.simple.Main'
+        attributes  'Main-Class': 'fr.usmb.compilation.Main'
     }
 }
 
@@ -50,14 +48,14 @@ task fatJar(type: Jar, group: 'build'){
     from sourceSets.main.output
     dependsOn configurations.runtimeClasspath
     // on ajoute les dependances, ie le runtime cup
-    // car on en a besoin pour faire tourner l'analyseur 
+    // car on en a besoin pour faire tourner l'analyseur
     from {
         configurations.runtimeClasspath.collect {
             it.isDirectory() ? it : zipTree(it)
         }
     }
     manifest {
-        attributes  'Main-Class': 'fr.usmb.m1isc.compilation.simple.Main'
+        attributes  'Main-Class': 'fr.usmb.compilation.Main'
     }
 }
 
@@ -69,4 +67,4 @@ build.mustRunAfter clean
 pluginManager.withPlugin('eclipse'){
     // tasks to run when build automatically is enabled
     eclipse.autoBuildTasks([tasks.named('generateCup'), tasks.named('generateJflex')])
-} 
+}

@@ -1,23 +1,21 @@
 /* package et imports */
-package fr.usmb.m1isc.compilation.simple;
+package fr.usmb.compilation;
 import java_cup.runtime.Symbol;
 
 // nom de la classe a generer
-class SimpleParser;
+class Parser;
 
 /* inclusion de code */
-
-action code {: 
+action code {:
     // pour utilisation dans les actions (classe action)
 :};
-
 
 parser code {:
     // pour le parser (redefinition de la methode reportant les erreurs d'analyse)
     public void report_error(String message, Object info) {
         String m = "";
         if (info instanceof java_cup.runtime.Symbol) {
-            Symbol s = ((Symbol) info);     
+            Symbol s = ((Symbol) info);
             if (s.left >= 0) {
                 /* Ajoute le numero de ligne  */
                 m = m + "Ligne " + (s.left+1) + " ";
@@ -27,7 +25,7 @@ parser code {:
                 m = m + "Colonne " + (s.right+1) + " ";
             }
             if (s.left >=0  || s.right >= 0) {
-                m = m + ": ";            
+                m = m + ": ";
             }
         }
         m = m + "Erreur de syntaxe";
@@ -36,22 +34,20 @@ parser code {:
 :};
 
 init with {:
-    //    initialisation du parser
+    // initialisation du parser
 :};
 
 /* declarations (terminaux, non-terminaux, etc.) */
 /* symboles terminaux */
 terminal VERBE, PRONOM, ADJECTIF, POINT;
-terminal ERROR;
 
 /* non terminaux */
 non terminal phrase , texte;
 
 /* grammaire */
 
-texte   ::= phrase texte 
-          | phrase ; 
-phrase  ::= PRONOM VERBE ADJECTIF {: System.out.println("OK"); :} POINT 
-          | error POINT 
+texte   ::= phrase texte
+          | phrase ;
+phrase  ::= PRONOM VERBE ADJECTIF {: System.out.println("OK"); :} POINT
+          | error POINT
           ;
-
