@@ -8,7 +8,7 @@
 /.classpath
 /.project
 /.externalToolBuilders/
-# IntelliJ configuration 
+# IntelliJ configuration
 # see https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
 # IntelliJ User-specific stuff
 .idea/**/workspace.xml
@@ -18,7 +18,7 @@
 .idea/**/shelf
 # IntelliJ Generated files
 .idea/**/contentModel.xml
-# IntelliJ 4 gradle 
+# IntelliJ 4 gradle
 .idea/**/gradle.xml
 .idea/**/libraries
 # IntelliJ auto-import (gradle/maven)
