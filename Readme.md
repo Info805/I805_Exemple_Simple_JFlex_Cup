@@ -19,7 +19,7 @@ un **verbe** (_est_ ou _boit_), un **complément**
 (_vite_, _bien_, _chaud_, _beau_, _belle_) ou un **point** (_.;!?_).
 
 À partir de cette spécification, JFlex génère le fichier java, 
-`build/generated/sources/jflex/main/java/fr/usmb/m1isc/compilation/simple/SimpleLexer.java` 
+`build/generated/sources/main/java/fr/usmb/compilation/Lexer.java` 
 qui contient l'analyseur lexical utilisé en entrée 
 de l'analyseur syntaxique.
 
@@ -28,8 +28,8 @@ de l'analyseur syntaxique.
 La spécification de l'analyseur syntaxique est dans le fichier [src/main/cup/Simple.cup](src/main/cup/Simple.cup).
 
 À partir de cette spécification, GNU Bison génère les fichiers, 
-`build/generated/sources/cup/main/java/fr/usmb/m1isc/compilation/simple/SimpleParser.java` (contient l'analyseur syntaxique) et 
-`build/generated/sources/cup/main/java/fr/usmb/m1isc/compilation/simple/SimpleParserSym.java` 
+`build/generated/sources/cup/main/java/fr/usmb/compilation/Parser.java` (contient l'analyseur syntaxique) et 
+`build/generated/sources/cup/main/java/fr/usmb/compilation/ParserSym.java` 
 (utilisé dans l'analyseur lexical pour renvoyer 
 les tokens (unités lexicales) attendus par l'analyseur syntaxique).
 
@@ -39,7 +39,16 @@ Pour construire le projet (nécessite l'installation d'une JDK),
 aller dans le dossier du projet puis exécuter 
 la commande `./gradelw build` ou `gradelw.bat build`. 
 
+## Utilisation de l'analyseur syntaxique
 
+```bash
+java -jar build/libs/I805_Exemple_Simple_JFlex_Cup-fat.jar <<EOF
+Elle est belle.
+Il boit vite !
+Elle est rapide ?
+Il boit chaud.
+EOF
+```
 
 
 
