@@ -1,9 +1,28 @@
-image: gradle:8.14.2-jdk11
 stages:
   - build
   - check
   
-build:
+.build:
   stage: build
   script:
-    - gradle build
+    - ./gradlew build
+  artifacts:
+    when: always
+    paths:
+      # JUNIT test report
+      - build/test-results/test/TEST-*.xml
+    reports:
+      junit: 
+        - build/test-results/test/TEST-*.xml
+
+build:java11:
+  image: eclipse-temurin:11-jdk
+  extends: .build
+
+build:java17:
+  image: eclipse-temurin:17-jdk
+  extends: .build
+
+build:java21:
+  image: eclipse-temurin:21-jdk
+  extends: .build
