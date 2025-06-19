@@ -9,6 +9,12 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    // tests avec JUnit 5
+    testImplementation("org.junit.jupiter:junit-jupiter:5.13.0")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
 sourceSets {
     main {
         java {
@@ -59,9 +65,15 @@ task fatJar(type: Jar, group: 'build'){
     }
 }
 
-build.dependsOn fatJar
+tasks.named('build') {
+    dependsOn fatJar
+    mustRunAfter clean
+}
 
-build.mustRunAfter clean
+// utilisation de JUnit 5 pour les tests
+tasks.named('test', Test) {
+    useJUnitPlatform()
+}
 
 // on configure le plugin eclipse s'il est actif
 pluginManager.withPlugin('eclipse'){
