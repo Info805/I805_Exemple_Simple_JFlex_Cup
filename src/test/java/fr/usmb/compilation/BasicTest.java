@@ -8,14 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -32,7 +30,6 @@ public class BasicTest {
     
     @BeforeEach
     void init() throws Exception {
-        System.setProperty("line.separator", "\n");
         toIn = new PipedOutputStream();
         err = new ByteArrayOutputStream();
         out = new ByteArrayOutputStream();
@@ -52,16 +49,18 @@ public class BasicTest {
             toIn.close();
             
             assertDoesNotThrow(()-> Main.main(new String[0]));
-            assertLinesMatch(expectedOutput.lines(), out.toString().lines());
+            // use java 11 methods
+            // assertLinesMatch(expectedOutput.lines(), out.toString().lines());
+            assertLinesMatch(Arrays.asList(expectedOutput.toString().split("\\R")), Arrays.asList(out.toString().split("\\R")));
             assertEquals(0, err.size());
         }
         
         List<String> phraseProvider() {
             LinkedList<String> res = new LinkedList<>();
-            for (String sujet: List.of("il", "elle", "Il", "Elle")) {
-                for (String verbe: List.of("est", "boit")) {
-                    for (String complement: List.of("beau", "belle", "vite", "chaud", "bien")) {
-                        for (String point: List.of(".", "!", "?", ";")) {
+            for (String sujet: Arrays.asList("il", "elle", "Il", "Elle")) {
+                for (String verbe: Arrays.asList("est", "boit")) {
+                    for (String complement: Arrays.asList("beau", "belle", "vite", "chaud", "bien")) {
+                        for (String point: Arrays.asList(".", "!", "?", ";")) {
                             res.push(sujet+" "+verbe+" "+complement+" "+point);
                         }
                     }
@@ -79,7 +78,9 @@ public class BasicTest {
             toIn.close();
             
             assertDoesNotThrow(()-> Main.main(new String[0]));
-            assertLinesMatch(expectedOutput.lines(), out.toString().lines());
+            // use java 11 methods
+            // assertLinesMatch(expectedOutput.lines(), out.toString().lines());
+            assertLinesMatch(Arrays.asList(expectedOutput.toString().split("\\R")), Arrays.asList(out.toString().split("\\R")));
             assertEquals(0, err.size());
         }
     }
@@ -132,7 +133,10 @@ public class BasicTest {
             toIn.close();
             
             assertDoesNotThrow(()-> Main.main(new String[0]));
-            List<String> result = out.toString().lines().collect(Collectors.toList());
+            // use java 11 and java 17 methods
+            // List<String> result = out.toString().lines().toList();
+            List<String> result = Arrays.asList(out.toString().split("\\R"));
+           
             assertEquals(result.get(0), "OK");
             assertTrue(result.get(1).contains("Erreur de syntaxe"));
             for(int i = 1; i < result.size()-2; i++) {
