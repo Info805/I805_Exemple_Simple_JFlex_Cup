@@ -15,6 +15,10 @@ stages:
       junit: 
         - build/test-results/test/TEST-*.xml
 
+build:java8:
+  image: eclipse-temurin:8-jdk
+  extends: .build
+
 build:java11:
   image: eclipse-temurin:11-jdk
   extends: .build
