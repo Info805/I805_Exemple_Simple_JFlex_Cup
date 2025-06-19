@@ -47,7 +47,9 @@ non terminal phrase , texte;
 /* grammaire */
 
 texte   ::= phrase texte
-          | phrase ;
+          | phrase
+          ;
+
 phrase  ::= PRONOM VERBE ADJECTIF {: System.out.println("OK"); :} POINT
           | error POINT
           ;
