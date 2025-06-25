@@ -73,6 +73,7 @@ tasks.named('build') {
 // utilisation de JUnit 5 pour les tests
 tasks.named('test', Test) {
     useJUnitPlatform()
+    testLogging.events("passed", "skipped", "failed")
 }
 
 // on configure le plugin eclipse s'il est actif
