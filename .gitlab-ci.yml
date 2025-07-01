@@ -24,7 +24,7 @@ build:java11:
   extends: .build
 
 build:java17:
-  image: eclipse-temurin:17-jdk
+  image: eclipse-temurin:17.0.15_6-jdk
   extends: .build
 
 build:java21:
