@@ -20,7 +20,7 @@ build:java8:
   extends: .build
 
 build:java11:
-  image: eclipse-temurin:11-jdk
+  image: eclipse-temurin:11.0.27_6-jdk
   extends: .build
 
 build:java17:
