@@ -5,7 +5,7 @@ stages:
 .build:
   stage: build
   script:
-    - ./gradlew build
+    - ./gradlew --warning-mode=all build
   artifacts:
     when: always
     paths:
