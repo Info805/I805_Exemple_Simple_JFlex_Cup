@@ -1,18 +1,31 @@
 stages:
   - build
   - check
-  
+
 .build:
+  variables:
+    GRADLE_USER_HOME: $CI_PROJECT_DIR/.gradle
   stage: build
   script:
     - ./gradlew --warning-mode=all build
+  cache:
+    - key:
+        files:
+          - gradle/wrapper/gradle-wrapper.properties
+      paths:
+        - .gradle/wrapper
+    - key: $CI_COMMIT_REF_SLUG
+      fallback_keys:
+        - master-protected
+      paths:
+        - .gradle/caches
   artifacts:
     when: always
     paths:
       # JUNIT test report
       - build/test-results/test/TEST-*.xml
     reports:
-      junit: 
+      junit:
         - build/test-results/test/TEST-*.xml
 
 build:java8:
