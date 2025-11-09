@@ -33,15 +33,15 @@ build:java8:
   extends: .build
 
 build:java11:
-  image: eclipse-temurin:11.0.28_6-jdk
+  image: eclipse-temurin:11.0.29_7-jdk
   extends: .build
 
 build:java17:
-  image: eclipse-temurin:17.0.16_8-jdk
+  image: eclipse-temurin:17.0.17_10-jdk
   extends: .build
 
 build:java21:
-  image: eclipse-temurin:21.0.8_9-jdk
+  image: eclipse-temurin:21.0.9_10-jdk
   extends: .build
 
 build:java24:
