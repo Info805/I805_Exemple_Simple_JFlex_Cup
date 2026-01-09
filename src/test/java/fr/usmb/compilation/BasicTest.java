@@ -26,8 +26,7 @@ public class BasicTest {
     private PipedOutputStream toIn;
     private ByteArrayOutputStream err;
     private ByteArrayOutputStream out;
-    
-    
+
     @BeforeEach
     void init() throws Exception {
         toIn = new PipedOutputStream();
@@ -47,14 +46,14 @@ public class BasicTest {
             String expectedOutput = "OK\n";
             toIn.write(phrase.getBytes());
             toIn.close();
-            
+
             assertDoesNotThrow(()-> Main.main(new String[0]));
             // use java 11 methods
             // assertLinesMatch(expectedOutput.lines(), out.toString().lines());
             assertLinesMatch(Arrays.asList(expectedOutput.toString().split("\\R")), Arrays.asList(out.toString().split("\\R")));
             assertEquals(0, err.size());
         }
-        
+
         List<String> phraseProvider() {
             LinkedList<String> res = new LinkedList<>();
             for (String sujet: Arrays.asList("il", "elle", "Il", "Elle")) {
@@ -65,18 +64,18 @@ public class BasicTest {
                         }
                     }
                 }
-                
+
             }
             return res;
         }
-        
+
         @Test
         void testWithSeveralValidSentences() throws Exception {
             String expectedOutput = "OK\nOK\nOK\nOK\n";
             String input = "Il est beau ! Elle boit vite;   \n   elle est belle. \tIl est chaud ?  ";
             toIn.write(input.getBytes());
             toIn.close();
-            
+
             assertDoesNotThrow(()-> Main.main(new String[0]));
             // use java 11 methods
             // assertLinesMatch(expectedOutput.lines(), out.toString().lines());
@@ -91,52 +90,52 @@ public class BasicTest {
         void testWithInvaldSubject() throws Exception {
             toIn.write("Papa est beau.".getBytes());
             toIn.close();
-            
+
             assertDoesNotThrow(()-> Main.main(new String[0]));
             assertTrue( out.toString().contains("Erreur de syntaxe"));
         }
-    
+
         @Test
         void testWithInvaldVerb() throws Exception {
             toIn.write("Il mange vite.".getBytes());
             toIn.close();
-            
+
             assertDoesNotThrow(()-> Main.main(new String[0]));
             assertTrue( out.toString().contains("Erreur de syntaxe"));
         }
-    
+
         @Test
         void testWithInvaldComplement() throws Exception {
             toIn.write("Elle est bonne.".getBytes());
             toIn.close();
-            
+
             assertDoesNotThrow(()-> Main.main(new String[0]));
             assertTrue( out.toString().contains("Erreur de syntaxe"));
         }
-    
+
         @Test
         void testWithInvaldPoint() throws Exception {
             toIn.write("Elle est belle :".getBytes());
             toIn.close();
-            
+
             assertThrows(Exception.class, ()-> Main.main(new String[0]));
             assertTrue(out.toString().contains("Erreur de syntaxe"));
         }
     }
-    
+
     @Nested
-    class testerrorRecovery {
+    class testErrorRecovery {
         @Test
         void testWithOneerror() throws Exception {
             String input = "Il est beau ! Elle mange vite;   \n   elle est belle. \tIl est chaud ?  ";
             toIn.write(input.getBytes());
             toIn.close();
-            
+
             assertDoesNotThrow(()-> Main.main(new String[0]));
             // use java 11 and java 17 methods
             // List<String> result = out.toString().lines().toList();
             List<String> result = Arrays.asList(out.toString().split("\\R"));
-           
+
             assertEquals(result.get(0), "OK");
             assertTrue(result.get(1).contains("Erreur de syntaxe"));
             for(int i = 1; i < result.size()-2; i++) {
