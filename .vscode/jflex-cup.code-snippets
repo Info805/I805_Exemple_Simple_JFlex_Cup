@@ -1,6 +1,35 @@
 {
-    "jfex template": {
-        "prefix": "%%jflex",
+    "jflex standalone template": {
+        "prefix": "%%jflexStandalone",
+        "body": [
+            "/* --------------------------Section de Code Utilisateur---------------------*/",
+            "package $1;",
+            "",
+            "%%",
+            "/* -----------------Section des Declarations et Options----------------------*/",
+            "// nom de la class a generer",
+            "%class $2",
+            "%unicode",
+            "%standalone",
+            "",
+            "// code a ajouter dans la classe produite",
+            "%{",
+            "$6",
+            "%}",
+            "",
+            "/* definitions regulieres */",
+            "",
+            "$4",
+            "%%",
+            "/* ------------------------Section des Regles Lexicales----------------------*/",
+            "/* regles */",
+            "",
+            "$5"
+        ],
+        "description": "jflex standalone basic template"
+    },
+    "jflex4cup template": {
+        "prefix": "%%jflex4cup",
         "body": [
             "/* --------------------------Section de Code Utilisateur---------------------*/",
             "package $1;",
@@ -22,7 +51,7 @@
             "",
             "// code a ajouter dans la classe produite",
             "%{",
-            "",
+            "$6",
             "%}",
             "",
             "/* definitions regulieres */",
@@ -34,7 +63,7 @@
             "",
             "$5"
         ],
-        "description": "jflex basic template"
+        "description": "jflex 4 cup basic template"
     },
     "cup template": {
         "prefix": "%%cup",
