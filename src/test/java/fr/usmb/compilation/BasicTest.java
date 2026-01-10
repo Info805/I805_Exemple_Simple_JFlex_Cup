@@ -126,7 +126,7 @@ public class BasicTest {
     @Nested
     class testErrorRecovery {
         @Test
-        void testWithOneerror() throws Exception {
+        void testWithOneError() throws Exception {
             String input = "Il est beau ! Elle mange vite;   \n   elle est belle. \tIl est chaud ?  ";
             toIn.write(input.getBytes());
             toIn.close();
