@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id "org.xbib.gradle.plugin.jflex" version "1.7.0"
-    id 'org.hvb.java-cup' version '0.1+'
+    id 'org.hvb.java-cup' version '0.1.2'
 }
 
 // In this section you declare where to find the dependencies of your project
