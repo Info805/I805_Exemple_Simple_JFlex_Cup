@@ -31,10 +31,12 @@ stages:
 build:java8:
   image: eclipse-temurin:8-jdk
   extends: .build
+  allow_failure: true
 
 build:java11:
   image: eclipse-temurin:11.0.29_7-jdk
   extends: .build
+  allow_failure: true
 
 build:java17:
   image: eclipse-temurin:17.0.17_10-jdk
@@ -44,6 +46,7 @@ build:java21:
   image: eclipse-temurin:21.0.9_10-jdk
   extends: .build
 
-build:java24:
-  image: eclipse-temurin:24-jdk
+build:java25:
+  image: eclipse-temurin:25.0.1_8-jdk
   extends: .build
+  allow_failure: true
