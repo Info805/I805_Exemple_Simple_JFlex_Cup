@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'jacoco'
     id "org.xbib.gradle.plugin.jflex" version "1.7.0"
     id 'org.hvb.java-cup' version '0.1.2'
 }
@@ -70,10 +71,20 @@ tasks.named('build') {
     mustRunAfter clean
 }
 
-// utilisation de JUnit 5 pour les tests
 tasks.named('test', Test) {
+    finalizedBy(jacocoTestReport)
+    // utilisation de JUnit 5 pour les tests
     useJUnitPlatform()
+    // show test results
     testLogging.events("passed", "skipped", "failed")
+}
+
+tasks.named('jacocoTestReport', JacocoReport) {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
 }
 
 // on configure le plugin eclipse s'il est actif
