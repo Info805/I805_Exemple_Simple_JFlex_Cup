@@ -27,7 +27,7 @@ de l'analyseur syntaxique.
 
 La spécification de l'analyseur syntaxique est dans le fichier [src/main/cup/Simple.cup](src/main/cup/Simple.cup).
 
-À partir de cette spécification, GNU Bison génère les fichiers, 
+À partir de cette spécification, Cup génère les fichiers, 
 `build/generated/sources/cup/main/java/fr/usmb/compilation/Parser.java` (contient l'analyseur syntaxique) et 
 `build/generated/sources/cup/main/java/fr/usmb/compilation/ParserSym.java` 
 (utilisé dans l'analyseur lexical pour renvoyer 
