@@ -35,24 +35,24 @@ workflow:
         - build/test-results/test/TEST-*.xml
 
 build:java8:
-  image: eclipse-temurin:8-jdk@sha256:fb1461dc88df08276706709d388f71c9e5eb2dc979e0ce9131118d9b601db331
+  image: eclipse-temurin:8-jdk@sha256:1ba7e0680eea83f1517ed309faa290559420e9c7345183021e5213d568442300
   extends: .build
   allow_failure: true
 
 build:java11:
-  image: eclipse-temurin:11.0.31_11-jdk@sha256:1d5e03cb02c10e21884f2ceae93e6d91c3d8474113e4912fb21b6b1f7330e781
+  image: eclipse-temurin:11.0.31_11-jdk@sha256:d0abfceaee12f0b0704fd116dc3d520078ec1c355f59115a4b48f0f50e16f975
   extends: .build
   allow_failure: true
 
 build:java17:
-  image: eclipse-temurin:17.0.19_10-jdk@sha256:b04a8c5d46e210873ffd1af6ad5f4d62c69ed3a6736993556eae60bba1373a23
+  image: eclipse-temurin:17.0.19_10-jdk@sha256:91b6210cce02091f6f0798a83ec51aa223828242c5a21a85793bb8c28dc891c4
   extends: .build
 
 build:java21:
-  image: eclipse-temurin:21.0.11_10-jdk@sha256:b9142586f9712700c6c9e07adcedfb18608b1a3a056e4001423a3354adfa9d80
+  image: eclipse-temurin:21.0.11_10-jdk@sha256:762d16be48b976c97801d198e5085b1f6facb13718a1e8fb67cb25d0b25337e1
   extends: .build
 
 build:java25:
-  image: eclipse-temurin:25.0.3_9-jdk@sha256:c2b7ea21649875fb9052237ac4e3cd4ef63968a2a389a0a1b1a72a5e53e5c93f
+  image: eclipse-temurin:25.0.3_9-jdk@sha256:dfc0093e3dbf43dae57827111c6e374f5b44fac19a9451584b2b336b81474d64
   extends: .build
   allow_failure: true
